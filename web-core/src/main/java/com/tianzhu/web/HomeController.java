@@ -1,6 +1,6 @@
 package com.tianzhu.web;
 
-//import java.text.DateFormat;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.InternalResourceView;
 
 /**
  * Handles requests for the application home page.
@@ -38,6 +40,27 @@ public class HomeController {
 		model.addAttribute("serverTime", date );
 		
 		return "home";
+	}
+	
+	@RequestMapping(value = "/jsp", method = RequestMethod.GET)
+	public ModelAndView homejsp(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.debug("Welcome home! The client locale is {}.", locale);
+		logger.trace("Welcome home! The client locale is {}.", locale);
+		logger.warn("Welcome home! The client locale is {}.", locale);
+		logger.error("Welcome home! The client locale is {}.", locale);
+				
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		ModelAndView modelandview = new ModelAndView(new InternalResourceView("/WEB-INF/jsps/homejsp.jsp"));
+		//modelAndView.addObject("serverTime", formattedDate);
+		//modelandview.addObject("serverTime", formattedDate);
+		return modelandview;
+		
 	}
 	
 }
