@@ -13,19 +13,22 @@
 	</appender>
 	
 	<!-- 输出日志到文件  每天一个文件 -->  
-    <!-- <appender name="dailyRollingFile"  
+     <appender name="dailyRollingFile"  
         class="org.apache.log4j.DailyRollingFileAppender">  
         <param name="Threshold" value="info"></param>  
         <param name="ImmediateFlush" value="true"></param>  
-        <param name="File" value="e:/logs/dailyRollingFile.log"></param>  
+        <param name="File" value="e:/logs/myapp.log"></param>  
         <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"></param>  
+        <param name="Append" value="false"></param>  
+        <!-- <param name="MaxFileSize" value="2MB"></param>  
+        <param name="MaxBackupIndex" value="100"></param> -->
         <layout class="org.apache.log4j.PatternLayout">  
             <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>  
         </layout>  
-    </appender>  -->
+    </appender>
     
     <!-- 输出日志到文件  文件大小到达指定尺寸的时候产生一个新的文件 -->  
-    <appender name="railyFile"   
+    <!-- <appender name="railyFile"   
         class="org.apache.log4j.RollingFileAppender">  
         <param name="File" value="e:/logs/myapp.log"></param> 
         <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"></param>  
@@ -37,7 +40,7 @@
         <layout class="org.apache.log4j.PatternLayout">  
             <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>  
         </layout>  
-    </appender> 
+    </appender>  -->
     
      <!-- 输出日志到文件 -->  
     <!-- <appender name="file"  
@@ -88,8 +91,8 @@
 	<root>
 		<priority value="trace" />       
         <appender-ref ref="console" />    
-        <!-- <appender-ref ref="dailyRollingFile" /> -->    
-        <appender-ref ref="railyFile" />    
+        <appender-ref ref="dailyRollingFile" />
+        <!-- <appender-ref ref="railyFile" />  -->   
         <!-- <appender-ref ref="file" />   --> 
 	</root>
 

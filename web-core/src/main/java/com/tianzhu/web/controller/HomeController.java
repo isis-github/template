@@ -1,4 +1,4 @@
-package com.tianzhu.web;
+package com.tianzhu.web.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -39,11 +39,11 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", date );
 		
-		return "home";
+		return "home/home";
 	}
 	
 	@RequestMapping(value = "/jsp", method = RequestMethod.GET)
-	public ModelAndView homejsp(Locale locale, Model model) {
+	public String homejsp(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		logger.debug("Welcome home! The client locale is {}.", locale);
 		logger.trace("Welcome home! The client locale is {}.", locale);
@@ -56,10 +56,10 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		ModelAndView modelandview = new ModelAndView(new InternalResourceView("/WEB-INF/jsps/homejsp.jsp"));
+		//ModelAndView modelandview = new ModelAndView(new InternalResourceView("/WEB-INF/jsps/homejsp.jsp"));
 		//modelAndView.addObject("serverTime", formattedDate);
 		//modelandview.addObject("serverTime", formattedDate);
-		return modelandview;
+		return "home/homejsp.jsp";
 		
 	}
 	
