@@ -13,6 +13,33 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- shishuocms -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>shishuo.cms.root</param-value>
+	</context-param>
+	
+	
+	<filter>
+		<filter-name>ftlFilter</filter-name>
+		<filter-class>com.shishuo.cms.filter.FtlFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ftlFilter</filter-name>
+		<url-pattern>*.ftl</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>manage</filter-name>
+		<filter-class>com.shishuo.cms.filter.ManageFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>manage</filter-name>
+		<url-pattern>/manage/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- shishuocms -->
 	
 	<filter>
         <filter-name>CharacterEncodingFilter</filter-name>
