@@ -264,4 +264,28 @@ INSERT INTO T_USER(USER_NAME, USER_EMAIL, USER_BIRTH, USER_PASSWORD, CREATED_AT,
 INSERT INTO T_USER(USER_NAME, USER_EMAIL, USER_BIRTH, USER_PASSWORD, CREATED_AT, UPDATED_AT, VERSION) VALUES('name3', 'name3@example.com' ,'2000-01-01','password3','2012-10-13 00:00:00','2012-10-13 00:00:00',0) 
 INSERT INTO T_USER(USER_NAME, USER_EMAIL, USER_BIRTH, USER_PASSWORD, CREATED_AT, UPDATED_AT, VERSION) VALUES('name4', 'name4@example.com' ,'2000-01-01','password4','2012-10-13 00:00:00','2012-10-13 00:00:00',0) 
 
+
+
+INSERT INTO `admin` VALUES (1,'shishuocms','6158f875bf826e15923779855b6eef2e','2012-08-08 00:00:00');
+
+INSERT INTO `config` VALUES ('shishuo_headline_image_height','420','首页头图的高（px）','2012-08-08 00:00:00');
+INSERT INTO `config` VALUES ('shishuo_headline_image_width','858','首页头图的宽（px）','2012-08-08 00:00:00');
+INSERT INTO `config` VALUES ('shishuo_seo_headline','师说CMS是用Java开发的内容管理系统','网站口号','2012-08-08 00:00:00');
+INSERT INTO `config` VALUES ('shishuo_seo_title','师说CMS','网站名称','2012-08-08 00:00:00');
+INSERT INTO `config` VALUES ('shishuo_static','false','是否启用全站静态化','2012-08-08 00:00:00');
+INSERT INTO `config` VALUES ('shishuo_template','blog','模板','2012-08-08 00:00:00');
+
+INSERT INTO `admin_folder` VALUES (1,1,'2014-10-29 20:48:42');
+INSERT INTO `admin_folder` VALUES (1,3,'2014-10-29 20:48:43');
+INSERT INTO `admin_folder` VALUES (1,4,'2014-10-29 20:48:44');
+INSERT INTO `admin_folder` VALUES (1,5,'2014-10-29 20:48:45');
+INSERT INTO `admin_folder` VALUES (1,2,'2014-10-29 20:48:46');
+
+INSERT INTO `article` VALUES (1,1,'1',1,'','Hello World','Hello World!!','<p>Hello World!!</p><div id=\"xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd\"></div>',0,0,'display','yes','2014-10-29 00:00:00','2014-10-29 20:49:54');
+
+INSERT INTO `folder` VALUES (1,0,'blog','博客','1','',1,1,0,0,0,'display','no','2014-10-29 18:37:39',NULL);
+INSERT INTO `folder` VALUES (2,0,'about','关于博主','2','<p>朕就是这样一汉子。<br/></p><div id=\"xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd\"></div>',1,1,0,0,0,'display','no','2014-10-29 18:38:02',NULL);
+INSERT INTO `folder` VALUES (3,1,'life','生活','1#3','',2,1,0,0,0,'display','no','2014-10-29 20:16:53',NULL);
+INSERT INTO `folder` VALUES (4,1,'work','工作','1#4','',2,1,0,0,0,'display','no','2014-10-29 20:17:06',NULL);
+INSERT INTO `folder` VALUES (5,1,'travel','旅游','1#5','',2,1,0,0,0,'display','no','2014-10-29 20:17:39',NULL);
 commit
