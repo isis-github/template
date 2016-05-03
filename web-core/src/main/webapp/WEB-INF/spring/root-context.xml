@@ -43,7 +43,7 @@
         <property name="timeBetweenEvictionRunsMillis" value="1800000" />
         <property name="numTestsPerEvictionRun" value="3" />
         <property name="minEvictableIdleTimeMillis" value="1800000" />
-        <property name="defaultAutoCommit" value="false" />
+        <property name="defaultAutoCommit" value="false" /> 
     </bean>
 
     <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
@@ -51,12 +51,12 @@
     </bean>
 
     <!-- <jee:jndi-lookup id="dataSource" jndi-name="jdbc/dataSource"></jee:jndi-lookup> -->
-
+<!-- 
     <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
         <jdbc:script location="classpath:/database/${database}-schema.sql" />
         <jdbc:script location="classpath:/database/${database}-dataload.sql" />
     </jdbc:initialize-database>
-	
+	 -->
 	
 	<jpa:repositories base-package="com.tianzhu" />
 

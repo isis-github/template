@@ -6,7 +6,10 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,112 +18,119 @@ import javax.persistence.Version;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+
+/**
+ * The persistent class for the T_USER database table.
+ * 
+ */
 @Entity
-@Table(name = "T_USER")
+@Table(name="T_USER")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * serial version id.
-     */
-    private static final long serialVersionUID = 1L;
+	@Id
+	@SequenceGenerator(name="T_USER_USERID_GENERATOR", sequenceName="T_USER_S")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="T_USER_USERID_GENERATOR")
+	@Column(name="USER_ID")
+	private Integer id;
 
-    @Id
-    @GeneratedValue
-    @Column(name = "USER_ID", unique = true, nullable = false)
-    private Integer id;
+	@Temporal(TemporalType.DATE)
+	@Column(name="CREATED_AT")
+	private Date createdAt;
 
-    @Column(name = "USER_NAME", nullable = false)
-    private String name;
+	@Temporal(TemporalType.DATE)
+	@Column(name="UPDATED_AT")
+	private Date updatedAt;
 
-    @Column(name = "USER_EMAIL", unique = true, nullable = false, length = 64)
-    private String email;
+	@Temporal(TemporalType.DATE)
+	@Column(name="USER_BIRTH")
+	private Date birth;
 
-    @Column(name = "USER_BIRTH", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date birth;
+	@Column(name="USER_EMAIL")
+	private String email;
 
-    @Column(name = "USER_PASSWORD", nullable = false, length = 64)
-    private String password;
+	@Column(name="USER_NAME")
+	private String name;
 
-    @Column(name = "CREATED_AT", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+	@Column(name="USER_PASSWORD")
+	private String password;
 
-    @Column(name = "UPDATED_AT", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
-
-    @Column(name = "VERSION", nullable = false)
+	@Column(name = "VERSION", nullable = false)
     @Version
     private Integer version;
 
-    public Integer getId() {
-        return id;
-    }
+	public User() {
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer userId) {
+		this.id = userId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Date getCreatedAt() {
+		return this.createdAt;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public Date getUpdatedAt() {
+		return this.updatedAt;
+	}
 
-    public Date getBirth() {
-        return birth;
-    }
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
+	public Date getBirth() {
+		return this.birth;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setBirth(Date userBirth) {
+		this.birth = userBirth;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getEmail() {
+		return this.email;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public void setEmail(String userEmail) {
+		this.email = userEmail;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public String getname() {
+		return this.name;
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public void setName(String userName) {
+		this.name = userName;
+	}
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	public String getPassword() {
+		return this.password;
+	}
 
-    public Integer getVersion() {
-        return version;
-    }
+	public void setPassword(String userPassword) {
+		this.password = userPassword;
+	}
 
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
+	 public Integer getVersion() {
+	        return version;
+	    }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+	    public void setVersion(Integer version) {
+	        this.version = version;
+	    }
+	    
+	    @Override
+	    public String toString() {
+	        return ToStringBuilder.reflectionToString(this,
+	                ToStringStyle.SHORT_PREFIX_STYLE);
+	    }
+
 }
