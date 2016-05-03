@@ -100,18 +100,6 @@ public class User implements Serializable {
 		this.Comments = Comments;
 	}
 
-	public Comment addComment(Comment Comment) {
-		getComments().add(Comment);
-		Comment.setUser(this);
-
-		return Comment;
-	}
-
-	public Comment removeComment(Comment Comment) {
-		getComments().remove(Comment);
-		Comment.setUser(null);
-
-		return Comment;
-	}
+	
 
 }

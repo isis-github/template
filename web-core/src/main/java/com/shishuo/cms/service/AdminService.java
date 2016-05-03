@@ -56,7 +56,7 @@ public class AdminService {
 		admin.setName(name);
 		admin.setPassword(AuthUtils.getPassword(password));
 		admin.setCreateTime(now);
-		adminDao.addAdmin(admin);
+		adminDao.save(admin);
 		return admin;
 	}
 
@@ -71,7 +71,7 @@ public class AdminService {
 	 * @return Integer
 	 */
 	public int deleteAdmin(long adminId) {
-		return adminDao.deleteAdmin(adminId);
+		return adminDao.delete(adminId);
 	}
 
 	// ///////////////////////////////

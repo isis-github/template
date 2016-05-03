@@ -197,19 +197,7 @@ public class Article implements Serializable {
 		this.Comments = Comments;
 	}
 
-	public Comment addComment(Comment Comment) {
-		getComments().add(Comment);
-		Comment.setArticle(this);
-
-		return Comment;
-	}
-
-	public Comment removeComment(Comment Comment) {
-		getComments().remove(Comment);
-		Comment.setArticle(null);
-
-		return Comment;
-	}
+	
 
 	public List<Media> getMedias() {
 		return this.Medias;
@@ -219,19 +207,7 @@ public class Article implements Serializable {
 		this.Medias = Medias;
 	}
 
-	public Media addMedia(Media Media) {
-		getMedias().add(Media);
-		Media.setArticle(this);
-
-		return Media;
-	}
-
-	public Media removeMedia(Media Media) {
-		getMedias().remove(Media);
-		Media.setArticle(null);
-
-		return Media;
-	}
+	
 
 	public Admin getAdmin() {
 		return this.Admin;

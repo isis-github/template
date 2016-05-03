@@ -225,18 +225,6 @@ public class Folder implements Serializable {
 		this.Articles = Articles;
 	}
 
-	public Article addArticle(Article Article) {
-		getArticles().add(Article);
-		Article.setFolder(this);
-
-		return Article;
-	}
-
-	public Article removeArticle(Article Article) {
-		getArticles().remove(Article);
-		Article.setFolder(null);
-
-		return Article;
-	}
+	
 
 }

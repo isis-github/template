@@ -26,7 +26,8 @@ public class AdminFolderService {
 		adminFolder.setAdminId(adminId);
 		adminFolder.setFolderId(folderId);
 		adminFolder.setCreateTime(new Date());
-		adminFolderDao.addAdminFolder(adminFolder);
+		//adminFolderDao.addAdminFolder(adminFolder);
+		adminFolderDao.save(adminFolder);
 		return adminFolder;
 	}
 
