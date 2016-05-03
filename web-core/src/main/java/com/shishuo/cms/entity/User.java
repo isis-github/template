@@ -1,87 +1,117 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
-
 package com.shishuo.cms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-import com.shishuo.cms.constant.UserConstant;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 /**
- * 用户实体
- * 
- * @author zsy
+ * The persistent class for the CMS_USER database table.
  * 
  */
+@Entity
+@Table(name="CMS_USER")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-public class User {
+	@Id
+	@SequenceGenerator(name="CMS_USER_USERID_GENERATOR", sequenceName="CMS_USER_S")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CMS_USER_USERID_GENERATOR")
+	@Column(name="USER_ID", unique=true, nullable=false)
+	private Long userId;
 
-	/**
-	 * 用户ID
-	 */
-	private long userId;
-
-	/**
-	 * 公共用户ID
-	 */
-	private long openId;
-
-	/**
-	 * 帐号类型
-	 */
-	private UserConstant.Type type;
-
-	/**
-	 * 用户名
-	 */
-	private String name;
-
-	/**
-	 * 时间
-	 */
+	@Temporal(TemporalType.DATE)
+	@Column(name="CREATE_TIME")
 	private Date createTime;
 
-	public long getUserId() {
-		return userId;
+	@Column(length=200)
+	private String name;
+
+	@Column(name="OPEN_ID")
+	private Long openId;
+
+	private int type;
+
+	//bi-directional many-to-one association to Comment
+	@OneToMany(mappedBy="User")
+	private List<Comment> Comments;
+
+	public User() {
 	}
 
-	public void setUserId(long userId) {
+	public Long getUserId() {
+		return this.userId;
+	}
+
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	public long getOpenId() {
-		return openId;
+	public Date getCreateTime() {
+		return this.createTime;
 	}
 
-	public void setOpenId(long openId) {
-		this.openId = openId;
-	}
-
-	public UserConstant.Type getType() {
-		return type;
-	}
-
-	public void setType(UserConstant.Type type) {
-		this.type = type;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public Long getOpenId() {
+		return this.openId;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setOpenId(Long openId) {
+		this.openId = openId;
+	}
+
+	public int getType() {
+		return this.type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public List<Comment> getComments() {
+		return this.Comments;
+	}
+
+	public void setComments(List<Comment> Comments) {
+		this.Comments = Comments;
+	}
+
+	public Comment addComment(Comment Comment) {
+		getComments().add(Comment);
+		Comment.setUser(this);
+
+		return Comment;
+	}
+
+	public Comment removeComment(Comment Comment) {
+		getComments().remove(Comment);
+		Comment.setUser(null);
+
+		return Comment;
 	}
 
 }

@@ -1,203 +1,252 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
-
 package com.shishuo.cms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-import com.shishuo.cms.constant.ArticleConstant;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 /**
- * 文件实体
- * 
- * @author zsy
+ * The persistent class for the CMS_ARTICLE database table.
  * 
  */
+@Entity
+@Table(name="CMS_ARTICLE")
+@NamedQuery(name="Article.findAll", query="SELECT a FROM Article a")
+public class Article implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-public class Article {
+	@Id
+	@SequenceGenerator(name="CMS_ARTICLE_ARTICLEID_GENERATOR", sequenceName="CMS_ARTICLE_S")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CMS_ARTICLE_ARTICLEID_GENERATOR")
+	@Column(name="ARTICLE_ID", unique=true, nullable=false)
+	private Long articleId;
 
-	/**
-	 * 文件Id
-	 */
-	private long articleId;
-
-	/**
-	 * 所属目录的第一级Id
-	 */
-	private long folderId;
-
-	/**
-	 * 
-	 */
-	private String path;
-
-	/**
-	 * 管理员Id
-	 */
-	private long adminId;
-
-	/**
-	 * 文件名称
-	 */
-	private String title;
-
-	/**
-	 * 文件名称
-	 */
-	private String summary;
-
-	/**
-	 * 文件内容
-	 */
-	private String content;
-
-	/**
-	 * 封面
-	 */
-	private String picture;
-
-	/**
-	 * 浏览人数
-	 */
-	private int viewCount;
-
-	/**
-	 * 评论人数
-	 */
+	@Column(name="COMMENT_COUNT", nullable=false)
 	private int commentCount;
 
-	/**
-	 * 文件状态
-	 */
-	private ArticleConstant.Status status;
+	@Lob
+	private String content;
 
-	/**
-	 * 审核
-	 */
-	private ArticleConstant.check check;
-
-	/**
-	 * 创建时间
-	 */
+	@Temporal(TemporalType.DATE)
+	@Column(name="CREATE_TIME")
 	private Date createTime;
 
-	/**
-	 * 更新时间
-	 */
+	@Column(name="IS_CHECK", nullable=false)
+	private int isCheck;
+
+	@Column(length=200)
+	private String path;
+
+	@Column(length=60)
+	private String picture;
+
+	@Column(nullable=false)
+	private int status;
+
+	@Column(length=2000)
+	private String summary;
+
+	@Column(nullable=false, length=200)
+	private String title;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="UPDATE_TIME")
 	private Date updateTime;
 
-	public long getArticleId() {
-		return articleId;
+	@Column(name="VIEW_COUNT", nullable=false)
+	private int viewCount;
+
+	//bi-directional many-to-one association to Comment
+	@OneToMany(mappedBy="Article")
+	private List<Comment> Comments;
+
+	//bi-directional many-to-one association to Media
+	@OneToMany(mappedBy="Article")
+	private List<Media> Medias;
+
+	//uni-directional many-to-one association to Admin
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ADMIN_ID", nullable=false)
+	private Admin Admin;
+
+	//bi-directional many-to-one association to Folder
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="FOLDER_ID")
+	private Folder Folder;
+
+	public Article() {
 	}
 
-	public void setArticleId(long articleId) {
+	public Long getArticleId() {
+		return this.articleId;
+	}
+
+	public void setArticleId(Long articleId) {
 		this.articleId = articleId;
 	}
 
-	public long getFolderId() {
-		return folderId;
-	}
-
-	public void setFolderId(long folderId) {
-		this.folderId = folderId;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public long getAdminId() {
-		return adminId;
-	}
-
-	public void setAdminId(long adminId) {
-		this.adminId = adminId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getSummary() {
-		return summary;
-	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getPicture() {
-		return picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
-	public int getViewCount() {
-		return viewCount;
-	}
-
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
-	}
-
 	public int getCommentCount() {
-		return commentCount;
+		return this.commentCount;
 	}
 
 	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
 	}
 
-	public ArticleConstant.Status getStatus() {
-		return status;
+	public String getContent() {
+		return this.content;
 	}
 
-	public void setStatus(ArticleConstant.Status status) {
-		this.status = status;
-	}
-
-	public ArticleConstant.check getCheck() {
-		return check;
-	}
-
-	public void setCheck(ArticleConstant.check check) {
-		this.check = check;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Date getCreateTime() {
-		return createTime;
+		return this.createTime;
 	}
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
+	public int getIsCheck() {
+		return this.isCheck;
+	}
+
+	public void setIsCheck(int isCheck) {
+		this.isCheck = isCheck;
+	}
+
+	public String getPath() {
+		return this.path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public int getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getSummary() {
+		return this.summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public Date getUpdateTime() {
-		return updateTime;
+		return this.updateTime;
 	}
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	public int getViewCount() {
+		return this.viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+
+	public List<Comment> getComments() {
+		return this.Comments;
+	}
+
+	public void setComments(List<Comment> Comments) {
+		this.Comments = Comments;
+	}
+
+	public Comment addComment(Comment Comment) {
+		getComments().add(Comment);
+		Comment.setArticle(this);
+
+		return Comment;
+	}
+
+	public Comment removeComment(Comment Comment) {
+		getComments().remove(Comment);
+		Comment.setArticle(null);
+
+		return Comment;
+	}
+
+	public List<Media> getMedias() {
+		return this.Medias;
+	}
+
+	public void setMedias(List<Media> Medias) {
+		this.Medias = Medias;
+	}
+
+	public Media addMedia(Media Media) {
+		getMedias().add(Media);
+		Media.setArticle(this);
+
+		return Media;
+	}
+
+	public Media removeMedia(Media Media) {
+		getMedias().remove(Media);
+		Media.setArticle(null);
+
+		return Media;
+	}
+
+	public Admin getAdmin() {
+		return this.Admin;
+	}
+
+	public void setAdmin(Admin Admin) {
+		this.Admin = Admin;
+	}
+
+	public Folder getFolder() {
+		return this.Folder;
+	}
+
+	public void setFolder(Folder Folder) {
+		this.Folder = Folder;
+	}
+
 }

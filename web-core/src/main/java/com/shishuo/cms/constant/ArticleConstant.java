@@ -20,14 +20,15 @@ public class ArticleConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum Status {
+	public static class Status {
 		/**
 		 * 隐藏
 		 */
-		hidden, /**
-		 * /** 公开的
+		public final static int hidden = 0;
+		
+		/** 公开的
 		 */
-		display,
+		public final static int display = 1;
 	};
 
 	/**
@@ -36,16 +37,16 @@ public class ArticleConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum check {
+	public static class check {
 		/**
 		 * 已审核
 		 */
-		yes, /**
+		public final static int yes =1; /**
 		 * /** 审核失败
 		 */
-		no, /**
+		public final static int no =2; /**
 		 * /** 未审核
 		 */
-		init,
+		public final static int init =0;
 	};
 }

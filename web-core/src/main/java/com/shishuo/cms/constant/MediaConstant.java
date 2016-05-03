@@ -22,14 +22,16 @@ public class MediaConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum Type {
+	public static class Type {
 		/**
 		 * 相册
 		 */
-		photo, /**
+		public final static int photo =1; /**
 		 * 文件
 		 */
-		file, video
+		public final static int file =2 ;
+		
+		public final static int video =3;
 	}
 
 	/**
@@ -38,16 +40,16 @@ public class MediaConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum Kind {
+	public static class Kind {
 		/**
 		 * 目录
 		 */
-		folder, /**
+		public final static int folder=1; /**
 		 * 文章
 		 */
-		article, /**
+		public final static int article =2;/**
 		 * 编辑器
 		 */
-		editor
+		public final static int editor =3;
 	}
 }

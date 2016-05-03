@@ -2,7 +2,9 @@ package com.shishuo.cms.constant;
 
 public class GuestbookConstant {
 
-	public static enum status {
-		display, hidden, init
+	public static class status {
+		public final static int display = 1;
+		public final static int hidden = 2;
+		public final static int init =0;
 	};
 }

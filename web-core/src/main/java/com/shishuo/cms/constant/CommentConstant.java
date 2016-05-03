@@ -17,29 +17,29 @@ public class CommentConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum Status {
+	public static class Status {
 		/**
 		 * 隐藏
 		 */
-		hidden,
+		public final static int hidden =0;
 		/**
 		 * 显示
 		 */
-		display,
+		public final static int display =1;
 		/**
 		 * 垃圾
 		 */
-		trash
+		public final static int trash = 2;
 	};
 
-	public static enum kind {
+	public static class kind {
 		/**
 		 * 隐藏
 		 */
-		article,
+		public final static int article =1;
 		/**
 		 * 显示
 		 */
-		folder
+		public final static int folder =2;
 	};
 }

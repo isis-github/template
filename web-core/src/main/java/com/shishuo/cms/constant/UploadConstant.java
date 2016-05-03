@@ -8,8 +8,9 @@ package com.shishuo.cms.constant;
 
 public class UploadConstant {
 
-	public static enum Type {
-		photo, file
+	public static class Type {
+		public final static int photo =1;
+		public final static int file =2;
 	};
 
 }

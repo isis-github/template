@@ -12,11 +12,13 @@ package com.shishuo.cms.constant;
  */
 public class FolderConstant {
 
-	public static enum status {
-		hidden, display
+	public static class status {
+		public final static int hidden =0;
+		public final static int display = 1;
 	};
 
-	public static enum check {
-		yes, no
+	public static class check {
+		public final static int yes =1;
+		public final static int no =0;
 	};
 }

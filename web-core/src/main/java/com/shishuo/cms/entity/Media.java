@@ -1,53 +1,104 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
-
 package com.shishuo.cms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import com.shishuo.cms.constant.MediaConstant;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-//TODO media
-public class Media {
 
-	private long mediaId;
-	private long kindId;
-	private String name;
-	private String path;
-	private long size;
-	private MediaConstant.Type type;
-	private MediaConstant.Kind kind;
+/**
+ * The persistent class for the CMS_MEDIA database table.
+ * 
+ */
+@Entity
+@Table(name="CMS_MEDIA")
+@NamedQuery(name="Media.findAll", query="SELECT m FROM Media m")
+public class Media implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@SequenceGenerator(name="CMS_MEDIA_MEDIAID_GENERATOR", sequenceName="CMS_MEDIA_S")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CMS_MEDIA_MEDIAID_GENERATOR")
+	@Column(name="MEDIA_ID", unique=true, nullable=false)
+	private Long mediaId;
+
+	@Column(name="ARTICLE_TITLE", length=200)
+	private String articleTitle;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="CREATE_TIME")
 	private Date createTime;
 
-	public long getMediaId() {
-		return mediaId;
+	private int length;
+
+	@Column(length=200)
+	private String name;
+
+	@Column(length=200)
+	private String path;
+
+	@Column(name="TYPE")
+	private int type;
+
+	//bi-directional many-to-one association to Article
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ARTICLE_ID", nullable=false)
+	private Article Article;
+	
+	//bi-directional many-to-one association to Article
+		@ManyToOne(fetch=FetchType.LAZY)
+		@JoinColumn(name="FOLDER_ID", nullable=false)
+		private Folder folder;
+
+	public Media() {
 	}
 
-	public void setMediaId(long mediaId) {
+	public Long getMediaId() {
+		return this.mediaId;
+	}
+
+	public void setMediaId(Long mediaId) {
 		this.mediaId = mediaId;
 	}
 
-	public long getKindId() {
-		return kindId;
+	public String getArticleTitle() {
+		return this.articleTitle;
 	}
 
-	public void setKindId(long kindId) {
-		this.kindId = kindId;
+	public void setArticleTitle(String articleTitle) {
+		this.articleTitle = articleTitle;
 	}
 
-	public MediaConstant.Kind getKind() {
-		return kind;
+	public Date getCreateTime() {
+		return this.createTime;
 	}
 
-	public void setKind(MediaConstant.Kind kind) {
-		this.kind = kind;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public int getLength() {
+		return this.length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -55,35 +106,35 @@ public class Media {
 	}
 
 	public String getPath() {
-		return path;
+		return this.path;
 	}
 
 	public void setPath(String path) {
 		this.path = path;
 	}
 
-	public long getSize() {
-		return size;
+	public int getType() {
+		return this.type;
 	}
 
-	public void setSize(long size) {
-		this.size = size;
-	}
-
-	public MediaConstant.Type getType() {
-		return type;
-	}
-
-	public void setType(MediaConstant.Type type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public Article getArticle() {
+		return this.Article;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setArticle(Article Article) {
+		this.Article = Article;
+	}
+	
+	public Folder getFolder() {
+		return this.folder;
+	}
+
+	public void setArticle(Folder folder) {
+		this.folder = folder;
 	}
 
 }

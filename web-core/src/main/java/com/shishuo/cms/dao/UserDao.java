@@ -2,8 +2,8 @@ package com.shishuo.cms.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.shishuo.cms.entity.Admin;
+import com.shishuo.cms.entity.User;
 
-public interface AdminDao extends JpaRepository<Admin, Long> {
+public interface UserDao extends JpaRepository<User, Long> {
 
 }

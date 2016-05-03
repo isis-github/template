@@ -16,8 +16,8 @@ public class UserConstant {
 	 * @author Herbert
 	 * 
 	 */
-	public static enum Type {
-		SHISHUO
+	public static class Type {
+		public final static int SHISHUO =1;
 	};
 
 }
