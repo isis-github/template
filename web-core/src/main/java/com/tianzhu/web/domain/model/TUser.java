@@ -25,8 +25,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table(name="T_USER")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User implements Serializable {
+@NamedQuery(name="TUser.findAll", query="SELECT u FROM TUser u")
+public class TUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -60,7 +60,7 @@ public class User implements Serializable {
     @Version
     private Integer version;
 
-	public User() {
+	public TUser() {
 	}
 
 	public Integer getId() {

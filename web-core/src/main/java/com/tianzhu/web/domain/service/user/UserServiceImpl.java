@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tianzhu.web.domain.common.exception.ResourceNotFoundException;
-import com.tianzhu.web.domain.model.User;
+import com.tianzhu.web.domain.model.TUser;
 import com.tianzhu.web.domain.repository.user.UserRepository;
 
 @Service
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     protected PasswordEncoder passwordEncoder;
 
     @Override
-    public void save(User user, String rawPassword) {
+    public void save(TUser user, String rawPassword) {
         String password = passwordEncoder.encode(rawPassword);
         user.setPassword(password);
 
@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User findOne(Integer id) {
-        User user = userRepository.findOne(id);
+    public TUser findOne(Integer id) {
+        TUser user = userRepository.findOne(id);
         if (user == null) {
             throw new ResourceNotFoundException("User [id=" + id
                     + "] is not found.");
@@ -52,21 +52,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<User> findAll(Pageable pageable) {
-        Page<User> page = userRepository.findAll(pageable);
+    public Page<TUser> findAll(Pageable pageable) {
+        Page<TUser> page = userRepository.findAll(pageable);
         return page;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<User> findByNameLike(String name, Pageable pageable) {
+    public Page<TUser> findByNameLike(String name, Pageable pageable) {
         String query = name; // TODO escape
-        Page<User> page = userRepository.findByNameLike(query, pageable);
+        Page<TUser> page = userRepository.findByNameLike(query, pageable);
         return page;
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(TUser user) {
         userRepository.delete(user);
     }
 

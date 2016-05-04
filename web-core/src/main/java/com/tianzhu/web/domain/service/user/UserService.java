@@ -3,16 +3,16 @@ package com.tianzhu.web.domain.service.user;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.tianzhu.web.domain.model.User;
+import com.tianzhu.web.domain.model.TUser;
 
 public interface UserService {
-	void save(User user, String rawPassword);
+	void save(TUser user, String rawPassword);
 
-	User findOne(Integer id);
+	TUser findOne(Integer id);
 
-	Page<User> findAll(Pageable pageable);
+	Page<TUser> findAll(Pageable pageable);
 
-	Page<User> findByNameLike(String name, Pageable pageable);
+	Page<TUser> findByNameLike(String name, Pageable pageable);
 
-	void delete(User user);
+	void delete(TUser user);
 }

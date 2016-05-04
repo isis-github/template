@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.InternalResourceView;
 
-import com.tianzhu.web.domain.model.User;
+import com.tianzhu.web.domain.model.TUser;
 import com.tianzhu.web.domain.service.user.UserService;
 
 @Controller
@@ -35,7 +35,7 @@ public class UserSearchController {
     @RequestMapping("list")
     public String list(@PageableDefaults Pageable pageable, Model model) {
     	//Pageable pageable = new PageRequest(0,20);
-        Page<User> page = userService.findAll(pageable);
+        Page<TUser> page = userService.findAll(pageable);
         model.addAttribute("page", page);
         //ModelAndView modelandview = new ModelAndView(new InternalResourceView("/WEB-INF/jsps/user/list.jsp"));
         return "user/list.jsp";
@@ -51,7 +51,7 @@ public class UserSearchController {
 
         String name = form.getName();
         String query = (StringUtils.hasText(name) ? name : "") + "%";
-        Page<User> page = userService.findByNameLike(query, pageable);
+        Page<TUser> page = userService.findByNameLike(query, pageable);
         model.addAttribute("page", page);
         return "user/list.jsp";
     }

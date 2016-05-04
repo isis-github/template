@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.InternalResourceView;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping(value = "home")
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -24,7 +25,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "thymeleaf", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		logger.debug("Welcome home! The client locale is {}.", locale);
@@ -43,7 +44,7 @@ public class HomeController {
 		return "home/home";
 	}
 	
-	@RequestMapping(value = "/jsp", method = RequestMethod.GET)
+	@RequestMapping(value = "jsp", method = RequestMethod.GET)
 	public String homejsp(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		logger.debug("Welcome home! The client locale is {}.", locale);
@@ -65,7 +66,7 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/freemarker", method = RequestMethod.GET)
+	@RequestMapping(value = "freemarker", method = RequestMethod.GET)
 	public String homefree(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		logger.debug("Welcome home! The client locale is {}.", locale);

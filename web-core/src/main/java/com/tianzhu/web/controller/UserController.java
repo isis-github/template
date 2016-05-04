@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tianzhu.web.controller.UserForm.UserCreateGroup;
 import com.tianzhu.web.controller.UserForm.UserDeleteGroup;
 import com.tianzhu.web.controller.UserForm.UserUpdateGroup;
-import com.tianzhu.web.domain.model.User;
+import com.tianzhu.web.domain.model.TUser;
 import com.tianzhu.web.domain.service.user.UserService;
 
 @Controller
@@ -66,7 +66,7 @@ public class UserController {
             return "user/createForm.jsp";
         }
 
-        User user = beanMapper.map(form, User.class);
+        TUser user = beanMapper.map(form, TUser.class);
         userService.save(user, form.getPassword());
 
         return "redirect:/user/create?complete";
@@ -83,7 +83,7 @@ public class UserController {
     public String updateForm(@RequestParam("id") Integer id, UserForm form,
             Model model) {
 
-        User user = userService.findOne(id);
+        TUser user = userService.findOne(id);
         beanMapper.map(user, form, "userExcludePassword");
 
         model.addAttribute(user);
@@ -119,7 +119,7 @@ public class UserController {
             return "user/updateForm.jsp";
         }
 
-        User user = userService.findOne(form.getId());
+        TUser user = userService.findOne(form.getId());
         beanMapper.map(form, user);
         userService.save(user, form.getPassword());
 
@@ -137,7 +137,7 @@ public class UserController {
     public String deleteForm(@RequestParam("id") Integer id, UserForm form,
             Model model) {
 
-        User user = userService.findOne(id);
+        TUser user = userService.findOne(id);
         beanMapper.map(user, form);
 
         model.addAttribute(user);
@@ -153,7 +153,7 @@ public class UserController {
             return "redirect:/user/list";
         }
 
-        User user = userService.findOne(form.getId());
+        TUser user = userService.findOne(form.getId());
         beanMapper.map(form, user);
 
         userService.delete(user);
