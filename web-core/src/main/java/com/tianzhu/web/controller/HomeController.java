@@ -31,6 +31,7 @@ public class HomeController {
 		logger.trace("Welcome home! The client locale is {}.", locale);
 		logger.warn("Welcome home! The client locale is {}.", locale);
 		logger.error("Welcome home! The client locale is {}.", locale);
+		
 				
 		Date date = new Date();
 		//DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -60,6 +61,28 @@ public class HomeController {
 		//modelAndView.addObject("serverTime", formattedDate);
 		//modelandview.addObject("serverTime", formattedDate);
 		return "home/homejsp.jsp";
+		
+	}
+	
+	
+	@RequestMapping(value = "/freemarker", method = RequestMethod.GET)
+	public String homefree(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.debug("Welcome home! The client locale is {}.", locale);
+		logger.trace("Welcome home! The client locale is {}.", locale);
+		logger.warn("Welcome home! The client locale is {}.", locale);
+		logger.error("Welcome home! The client locale is {}.", locale);
+				
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		//ModelAndView modelandview = new ModelAndView(new InternalResourceView("/WEB-INF/jsps/homejsp.jsp"));
+		//modelAndView.addObject("serverTime", formattedDate);
+		//modelandview.addObject("serverTime", formattedDate);
+		return "home/homefree.ftl";
 		
 	}
 	

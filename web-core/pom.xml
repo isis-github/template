@@ -621,7 +621,12 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
+		<!-- freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.20</version>
+		</dependency>
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -637,19 +642,19 @@
 	</dependencies>
     <build>
     	<resources>
-			<resource>
+			 <resource>
 				<directory>src/main/resources</directory>
 				<targetPath>${rundir}/WEB-INF/classes</targetPath>
 				<!-- <targetPath>${basedir}/target/classes</targetPath> -->
-			</resource>
+			</resource> 
 			<resource>
 				<directory>src/main/webapp</directory>
 				<targetPath>${rundir}</targetPath>
 			</resource>
-			 <resource>
+			 <!--  <resource>
 				<directory>${basedir}/target/classes</directory>
 				<targetPath>${rundir}/WEB-INF/classes</targetPath>
-			</resource>
+			</resource> -->
 		</resources>
         <plugins>
             <plugin>
